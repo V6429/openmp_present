@@ -1,0 +1,56 @@
+
+
+TODO:
+*******************************************************************************************
+ppt time=1hr
+
+    ***************************************************************************************
+    1.  WHAT is openMp -- intro to OPENMP
+    2.  SLIDE -- show comparison with pthread (see :Introduction to OpenMP: 05 Module 3 @6:28)
+    (5m)
+    ***************************************************************************************
+    HOW do we use openMP:
+    3. how to complile
+    4. multithreading:how to create thread ---- THE syntax
+       show a code demo 
+    (10m)
+    5. multithreading:how to use a set of instructions multi --- THE syntax
+       show a code demo 
+    (10m)
+    6. multithreading:how to share data--THE syntax
+       show a code demo 
+       locking data,etc
+    (15m)
+    7. multithreading:how to join the thread THE syntax
+    ***************************************************************************************
+    x.more content if reqd--> 
+    8. WHY use openmp --5m
+    9. API refernce doc, link to video
+
+********************************************************************************************
+add/remove content to the above content.
+
+++++++++++++++++
+Code---hsv  vs
+Theory--vp  sb 
+++++++++++++++++
+
+
+
+add/info : 
+a) theory opemp-core syntax
+b) how to do setup
+c) fork-join.jpeg thread0.jpeg
+d) 07 mod 4 0:38 
+e) no wait implicit barrier
+f) sections 
+g) env variables
+h) data env 
+
+
+
+
+// 1 - create threads that work in shared addr space
+// 2 - unintednded sharing that can get into race condition
+// 3 - synchronisation to organize disciplined access to data
+// 4 - manage the data env to reduce synchronization
