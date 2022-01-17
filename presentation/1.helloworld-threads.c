@@ -15,7 +15,7 @@ int main()
     int ID = omp_get_thread_num(); // runtimelibraryroutine  to get unique id for each thread
     printf("\n1-Hello world from T-%d", ID);
     printf("\n2-Hello world from T-%d", ID);
-
+    
     }
 }
 
