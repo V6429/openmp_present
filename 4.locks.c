@@ -8,7 +8,6 @@
  * 
  */
 
-
 /**
  * omp.h 
  * 
@@ -26,7 +25,7 @@
  *
  * 
  * 
- * 
+ * ------------------------------------------------------------------additional
  * omp_get_num_threads()<---------- get the number of threads in the region
  * omp_get_max_threads() <----- max threads the system will give to the program
  *  

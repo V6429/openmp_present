@@ -1,0 +1,23 @@
+/**
+ * @file 6.Tasks
+ * 
+ * Tasks are independent unit of work:
+ *          have its own code
+ *          have its own data environment
+ *          have internal control variables
+ *  
+ * The system decides when to ececute them.
+ * 
+ * #pragma omp task 
+ *    foo()          <-- each thread creates a task
+ * #pragma omp barrier   wait for all tasks to be completed (who is going to execute the tasks created by threads is unknown)
+ * 
+ * #pragma omp single
+ * {
+ * 
+ *    #pragma omp task
+ *       bar();          <------a single thread creats a stack 
+ *                        <------dont know which thread is going to execute this
+ * 
+ * }                      
+ */

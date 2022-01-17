@@ -14,7 +14,7 @@
     *  Barrier
     *  Ordered
  * Low level:
-    * Flush
+    * Flush        <--me the thread doing the flush will make my view consisitent
     * LOCKS
  * 
  */
@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <omp.h>
 
-long num_steps = 10000000;
+long num_steps = 1000000000;
 double step;
 
 #define NUMOF_THREADS 4
@@ -54,15 +54,15 @@ void main()
         for (i = thread_id; i < num_steps; i = i + nthreads_at_thread_stack)
         {
             x = (i + 0.5) * step;
-            for (int x = 0; x < 1000; x++)
-                ;
             sum = sum + 4.0 / (1.0 + x * x);
         }
 
         printf("Sum=%f \n", sum);
 #pragma omp barrier // waiting for all threads to complete (so as to print individual sums neatly)
 
-#pragma omp Critical // hey threads, execute the following ONE AT A TIME!!! stop causing race conditions
+
+
+#pragma omp single // hey threads, execute the following ONE AT A TIME!!! stop causing race conditions
         {
             printf("Total sum = %f = %f +%f \n", totalsum + sum, totalsum, sum);
             totalsum = totalsum + sum;
@@ -70,7 +70,6 @@ void main()
     }
 
     pi = totalsum * step;
-
     printf("\nResult=%f\n", pi);
     printf("used %d no.of threads for computation\n", nthreads);
 }
