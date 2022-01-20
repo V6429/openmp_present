@@ -7,14 +7,14 @@ int taskprinter(int taskCreaterID);
 
 int main()
 {
-    int  T_ID;
+    int  Thread_ID;
 
-#pragma omp parallel private(T_ID)
+#pragma omp parallel private(Thread_ID)
     {
-        T_ID = omp_get_thread_num(); // individual ids for each thread
+        Thread_ID = omp_get_thread_num(); // individual ids for each thread
 
         #pragma omp task
-        taskprinter(T_ID);          // each thread will create a task
+        taskprinter(Thread_ID+100);          // each thread will create a task
         #pragma omp barrier        // synchnorizing threads to ensure all task till here are completed
 
 
@@ -23,18 +23,24 @@ int main()
         // a more common methord: where a  single thread will create all the tasks
         #pragma omp single 
         {
-            printf("\n\nT-%d is creating a lot of tasks\n", T_ID);
+            
+            printf("\n\nT-%d is creating a lot of tasks\n", Thread_ID);
             for (int i = 0; i < 50; i++)
             {
             #pragma omp task 
-                    taskprinter(T_ID);
-            } // system will do load balancing of the work
+                    taskprinter(Thread_ID);
+            }                                     // system will do load balancing of the task work
+
 
         } // remember single has an implied barrier
     }
+
+
+
+
+
+
 }
-
-
 
 
 
@@ -44,11 +50,11 @@ int main()
 int taskprinter(int taskCreaterID)
 {
 
-    int taskExecuter = omp_get_thread_num(); // just to make this point clear
+    int taskExecuterID = omp_get_thread_num(); // just to make this point clear
                                              // task creater and executer can be different
 
     for (int i = 0; i < (100000 * (taskCreaterID+1)); i++); // just stalling to create a delay
 
 
-    printf("\nThis was a task CREATED by T-%d and is EXECUTED BY T-%d", taskCreaterID, taskExecuter);
+    printf("\nThis was a task CREATED by T-%d and is EXECUTED BY T-%d", taskCreaterID, taskExecuterID);
 }
